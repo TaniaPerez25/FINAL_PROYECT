@@ -13,9 +13,18 @@ router.get('/',async function(req, res, next) {
         next(err);
     }
 });
+module.exports = router;
 
 
-
-
+router.post('/',async function(req, res, next) {
+    try{
+        res.json(await languages.create(req.body));
+    } 
+    catch (error){
+        console.log('Error while creating a language', error.message);
+        next(error);
+    }
+});
 
 module.exports = router;
+
