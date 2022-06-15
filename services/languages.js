@@ -71,9 +71,46 @@ async function create(language){
     return{message}
 }
 
-module.exports={
-    getMultiple,
-    create
+async function update(id,language){
+    const result = await db.query(
+        `UPDATE languages 
+        SET 
+        name = '${language.name}', 
+        description = '${language.description}', 
+        year = ${language.year}
+        WHERE id= ${id}
+        `
+    );
+ 
+    let message = "Error in update a programming language";
+    if (result.affectedRows){
+        message = "A language has been updated!";
+    }
+
+    return{message}
 }
 
 
+async function remove(id,language){
+    const result = await db.query(
+        `DELETE FROM languages WHERE id=${id}
+      
+        `
+    );
+ 
+    let message = "Error in update a programming language";
+    if (result.affectedRows){
+        message = "A language has been deleted!";
+    }
+
+    return{message}
+}
+
+
+
+module.exports={
+    getMultiple,
+    create,
+    update,
+    remove
+}
