@@ -19,8 +19,7 @@ module.exports = router;
 router.post('/',async function(req, res, next) {
     try{
         res.json(await languages.create(req.body));
-    } 
-    catch (error){
+    } catch (error){
         console.log('Error while creating a language', error.message);
         next(error);
     }
